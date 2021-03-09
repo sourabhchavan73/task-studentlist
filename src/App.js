@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-
-
 import AddStudent from './components/AddStudent';
 import StudentDetails from './components/StudentDetails'
 
@@ -16,7 +11,7 @@ function App() {
             name: 'Mayur',
             email: 'abc@gmail.com',
             number: 1234564,
-            details: 'good guy'
+            gender: 'male'
         },
     
         {
@@ -24,7 +19,7 @@ function App() {
             name: 'Sourabh',
             email: 'abc@gmail.com',
             number: 1234564,
-            details: 'good guy'
+            gender: 'male'
         },
     
         {
@@ -32,7 +27,7 @@ function App() {
             name: 'Pashya',
             email: 'abc@gmail.com',
             number: 1234564,
-            details: 'good guy'
+            gender: 'male'
         },
     ])
 
@@ -81,7 +76,7 @@ function App() {
                     oneditclick={editIdHandler}
                     students={students} 
                     onDelete={deleteStudent}/> : 
-                    "No student record found"}
+                    "No student records found"}
               </div>
             </div>  
         </div>

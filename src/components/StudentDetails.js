@@ -13,6 +13,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 const useStyles = makeStyles(theme => ({
@@ -50,6 +54,11 @@ const useStyles = makeStyles(theme => ({
     formControl: {
         width: '100%',
         fontSize: '11px'
+    },
+
+    formControl: {
+        width: '100%',
+        fontSize: '11px'
     }
 }))
 
@@ -61,6 +70,7 @@ const StudentDetails = ({students, onDelete, oneditclick, editName, editStudent}
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [number, setNumber] = useState(''); 
+    const [gender, setGender] = useState('');
 
     const handleSubmit = () => {
 
@@ -69,13 +79,15 @@ const StudentDetails = ({students, onDelete, oneditclick, editName, editStudent}
                 id : editName[0].id,
                 name: name || editName[0].name ,
                 email: email || editName[0].email,
-                number: number || editName[0].number
+                number: number || editName[0].number,
+                gender: gender || editName[0].gender
             }
 
             editStudent(newData);
             setName('');
             setEmail('');
             setNumber('');
+            setGender('')
             
         }
 
@@ -93,16 +105,18 @@ const StudentDetails = ({students, onDelete, oneditclick, editName, editStudent}
                         <TableCell align="center">Name</TableCell>
                         <TableCell align="center">Email Id</TableCell>
                         <TableCell align="center">Phone Number</TableCell>
+                        <TableCell align="center">Gender</TableCell>
                         <TableCell align="center">Actions</TableCell>
                     </TableRow>
                 </TableHead>
 
                 {students.map((student, index) => (
-                    <TableBody>
+                    <TableBody key={index}>
                         <TableRow >
                             <TableCell align="center">{student.name}</TableCell>
                             <TableCell align="center">{student.email}</TableCell>
                             <TableCell align="center">{student.number}</TableCell>
+                            <TableCell align="center">{student.gender}</TableCell>
                             <TableCell align="center">                       
                                 <EditIcon 
                                     onClick={() => {
@@ -123,8 +137,6 @@ const StudentDetails = ({students, onDelete, oneditclick, editName, editStudent}
                 ))}
             </Table>
         </TableContainer>
-
-
 
             <Dialog 
                 open={open} 
@@ -166,12 +178,28 @@ const StudentDetails = ({students, onDelete, oneditclick, editName, editStudent}
                             <div className={classes.formGroup}>
                                 <TextField
                                     className={classes.formControl} 
+                                    type="number"
                                     id="phone" 
                                     label="phone"
                                     value = {number || editName.length > 0 && editName[0].number}
                                     onChange={(event) => setNumber(event.target.value)}
                                 />
                             </div>
+                        </Grid>
+
+                        <Grid item sm={6}>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Select Gender</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="select"
+                                    value={gender}
+                                    onChange={(e) => setGender(e.target.value)}>
+
+                                    <MenuItem value={'male'}>Male</MenuItem>
+                                    <MenuItem value={'female'}>Female</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
                     </Grid>
 
